@@ -18,7 +18,7 @@ const connectDB = async () => {
         const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/college_erp';
         const conn = await mongoose.connect(mongoURI);
 
-        console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+        console.log(` MongoDB Connected: ${conn.connection.host}`);
 
         // ============================================
         // AUTO-CREATE DEFAULT ADMIN ACCOUNT
@@ -30,7 +30,7 @@ const connectDB = async () => {
 
     } catch (error) {
         // If connection fails, show error and stop the server
-        console.error(`❌ MongoDB Connection Error: ${error.message}`);
+        console.error(` MongoDB Connection Error: ${error.message}`);
         process.exit(1); // Stop the server (1 = error exit)
     }
 };
@@ -61,11 +61,11 @@ async function createDefaultAdmin() {
             });
 
             await admin.save();
-            console.log('👤 Default Admin account created:');
+            console.log(' Default Admin account created:');
             console.log('   Email: admin@erp.com');
             console.log('   Password: Admin@123');
         } else {
-            console.log('👤 Admin account already exists');
+            console.log(' Admin account already exists');
         }
     } catch (error) {
         console.error('Error creating default admin:', error.message);

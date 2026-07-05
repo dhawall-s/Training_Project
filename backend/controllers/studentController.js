@@ -26,7 +26,7 @@ const getDashboard = async (req, res) => {
         const student = await Student.findOne({ userId: req.user.id });
 
         if (!student) {
-            return res.status(404).json({ message: '❌ Student record not found' });
+            return res.status(404).json({ message: ' Student record not found' });
         }
 
         // Count total attendance records and present days
@@ -68,7 +68,7 @@ const getDashboard = async (req, res) => {
 
     } catch (error) {
         console.error('Dashboard Error:', error);
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -78,7 +78,7 @@ const getDashboard = async (req, res) => {
 const getAttendance = async (req, res) => {
     try {
         const student = await Student.findOne({ userId: req.user.id });
-        if (!student) return res.status(404).json({ message: '❌ Student not found' });
+        if (!student) return res.status(404).json({ message: ' Student not found' });
 
         const attendance = await Attendance.find({ studentId: student._id })
             .populate('subjectId', 'name code')
@@ -86,7 +86,7 @@ const getAttendance = async (req, res) => {
 
         res.json({ attendance });
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -96,7 +96,7 @@ const getAttendance = async (req, res) => {
 const getAssignments = async (req, res) => {
     try {
         const student = await Student.findOne({ userId: req.user.id });
-        if (!student) return res.status(404).json({ message: '❌ Student not found' });
+        if (!student) return res.status(404).json({ message: ' Student not found' });
 
         // Get subjects matching department & semester (case & space-insensitive)
         const subjects = await Subject.find({
@@ -115,7 +115,7 @@ const getAssignments = async (req, res) => {
 
         res.json({ assignments });
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -125,7 +125,7 @@ const getAssignments = async (req, res) => {
 const getNotes = async (req, res) => {
     try {
         const student = await Student.findOne({ userId: req.user.id });
-        if (!student) return res.status(404).json({ message: '❌ Student not found' });
+        if (!student) return res.status(404).json({ message: ' Student not found' });
 
         const subjects = await Subject.find({
             department: { $regex: new RegExp('^\\s*' + escapeRegex(student.department.trim()) + '\\s*$', 'i') },
@@ -142,7 +142,7 @@ const getNotes = async (req, res) => {
 
         res.json({ notes });
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -152,7 +152,7 @@ const getNotes = async (req, res) => {
 const getResults = async (req, res) => {
     try {
         const student = await Student.findOne({ userId: req.user.id });
-        if (!student) return res.status(404).json({ message: '❌ Student not found' });
+        if (!student) return res.status(404).json({ message: ' Student not found' });
 
         const results = await Result.find({ studentId: student._id })
             .populate('subjectId', 'name code')
@@ -160,7 +160,7 @@ const getResults = async (req, res) => {
 
         res.json({ results });
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -170,7 +170,7 @@ const getResults = async (req, res) => {
 const getTimetable = async (req, res) => {
     try {
         const student = await Student.findOne({ userId: req.user.id });
-        if (!student) return res.status(404).json({ message: '❌ Student not found' });
+        if (!student) return res.status(404).json({ message: ' Student not found' });
 
         const timetable = await Timetable.find({
             department: { $regex: new RegExp('^\\s*' + escapeRegex(student.department.trim()) + '\\s*$', 'i') },
@@ -179,7 +179,7 @@ const getTimetable = async (req, res) => {
 
         res.json({ timetable });
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -189,7 +189,7 @@ const getTimetable = async (req, res) => {
 const getSubjects = async (req, res) => {
     try {
         const student = await Student.findOne({ userId: req.user.id });
-        if (!student) return res.status(404).json({ message: '❌ Student not found' });
+        if (!student) return res.status(404).json({ message: ' Student not found' });
 
         const subjects = await Subject.find({
             department: { $regex: new RegExp('^\\s*' + escapeRegex(student.department.trim()) + '\\s*$', 'i') },
@@ -198,7 +198,7 @@ const getSubjects = async (req, res) => {
 
         res.json({ subjects });
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 

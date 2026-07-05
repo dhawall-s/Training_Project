@@ -28,13 +28,13 @@ const verifyToken = (req, res, next) => {
         const authHeader = req.headers['authorization'];
 
         if (!authHeader) {
-            return res.status(401).json({ message: '❌ No token provided. Please login first.' });
+            return res.status(401).json({ message: ' No token provided. Please login first.' });
         }
 
         const token = authHeader.split(' ')[1]; // "Bearer TOKEN" → "TOKEN"
 
         if (!token) {
-            return res.status(401).json({ message: '❌ Invalid token format.' });
+            return res.status(401).json({ message: ' Invalid token format.' });
         }
 
         // jwt.verify() checks if the token is valid and not expired
@@ -48,7 +48,7 @@ const verifyToken = (req, res, next) => {
         // next() = "ok, continue to the next function"
         next();
     } catch (error) {
-        return res.status(401).json({ message: '❌ Token expired or invalid. Please login again.' });
+        return res.status(401).json({ message: ' Token expired or invalid. Please login again.' });
     }
 };
 
@@ -61,7 +61,7 @@ const checkRole = (...roles) => {
         // req.user.role was set by verifyToken above
         if (!roles.includes(req.user.role)) {
             return res.status(403).json({
-                message: '❌ Access denied. You do not have permission.'
+                message: ' Access denied. You do not have permission.'
             });
         }
         next();

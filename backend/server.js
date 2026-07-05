@@ -49,7 +49,7 @@ app.use((req, res, next) => {
     // Only apply check to API routes, skip static assets if any
     if (req.path.startsWith('/api') && mongoose.connection.readyState !== 1) {
         return res.status(503).json({
-            message: '❌ Database connection is not established. Please ensure MongoDB is running on your machine.'
+            message: ' Database connection is not established. Please ensure MongoDB is running on your machine.'
         });
     }
     next();
@@ -82,8 +82,8 @@ const PORT = process.env.PORT || 5000;
 // Listen only when not deployed on Vercel (production serverless environment)
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
-        console.log(`🚀 Server is running on http://localhost:${PORT}`);
-        console.log(`📁 Upload folder: ${path.join(__dirname, 'uploads')}`);
+        console.log(`Server is running on http://localhost:${PORT}`);
+        console.log(`Upload folder: ${path.join(__dirname, 'uploads')}`);
     });
 }
 

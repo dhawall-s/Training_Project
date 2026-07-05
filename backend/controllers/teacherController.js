@@ -28,7 +28,7 @@ const getDashboard = async (req, res) => {
         const teacher = await Teacher.findOne({ userId: req.user.id }).populate('subjects');
 
         if (!teacher) {
-            return res.status(404).json({ message: '❌ Teacher record not found' });
+            return res.status(404).json({ message: ' Teacher record not found' });
         }
 
         // Count students in teacher's department (case-insensitive & trimmed space)
@@ -60,7 +60,7 @@ const getDashboard = async (req, res) => {
 
     } catch (error) {
         console.error('Teacher Dashboard Error:', error);
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -98,13 +98,13 @@ const markAttendance = async (req, res) => {
         }
 
         res.json({
-            message: `✅ Attendance marked for ${savedRecords.length} students!`,
+            message: `Attendance marked for ${savedRecords.length} students!`,
             records: savedRecords
         });
 
     } catch (error) {
         console.error('Attendance Error:', error);
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -127,12 +127,12 @@ const uploadNote = async (req, res) => {
         await note.save();
 
         res.status(201).json({
-            message: '✅ Notes uploaded successfully!',
+            message: 'Notes uploaded successfully!',
             note
         });
 
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -157,12 +157,12 @@ const uploadAssignment = async (req, res) => {
         await assignment.save();
 
         res.status(201).json({
-            message: '✅ Assignment uploaded successfully!',
+            message: 'Assignment uploaded successfully!',
             assignment
         });
 
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -200,12 +200,12 @@ const enterMarks = async (req, res) => {
         }
 
         res.json({
-            message: `✅ Marks entered for ${savedResults.length} students!`,
+            message: `Marks entered for ${savedResults.length} students!`,
             results: savedResults
         });
 
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -215,7 +215,7 @@ const enterMarks = async (req, res) => {
 const getStudents = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ userId: req.user.id });
-        if (!teacher) return res.status(404).json({ message: '❌ Teacher not found' });
+        if (!teacher) return res.status(404).json({ message: ' Teacher not found' });
 
         const students = await Student.find({
             department: { $regex: new RegExp('^\\s*' + escapeRegex(teacher.department.trim()) + '\\s*$', 'i') }
@@ -224,7 +224,7 @@ const getStudents = async (req, res) => {
         res.json({ students });
 
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -234,7 +234,7 @@ const getStudents = async (req, res) => {
 const getSubjects = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ userId: req.user.id }).populate('subjects');
-        if (!teacher) return res.status(404).json({ message: '❌ Teacher not found' });
+        if (!teacher) return res.status(404).json({ message: ' Teacher not found' });
 
         const departmentSubjects = await Subject.find({
             department: { $regex: new RegExp('^\\s*' + escapeRegex(teacher.department.trim()) + '\\s*$', 'i') }
@@ -246,7 +246,7 @@ const getSubjects = async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
@@ -256,7 +256,7 @@ const getSubjects = async (req, res) => {
 const getTimetable = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ userId: req.user.id });
-        if (!teacher) return res.status(404).json({ message: '❌ Teacher not found' });
+        if (!teacher) return res.status(404).json({ message: ' Teacher not found' });
 
         const timetable = await Timetable.find({
             department: { $regex: new RegExp('^\\s*' + escapeRegex(teacher.department.trim()) + '\\s*$', 'i') }
@@ -265,7 +265,7 @@ const getTimetable = async (req, res) => {
         res.json({ timetable });
 
     } catch (error) {
-        res.status(500).json({ message: '❌ Server error' });
+        res.status(500).json({ message: ' Server error' });
     }
 };
 
