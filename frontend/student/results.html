@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Results - College ERP</title><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></head>
+<body>
+    <nav class="navbar"><div class="logo"><i class="fas fa-graduation-cap"></i> College <span>ERP</span></div><div class="nav-links"><a href="profile.html"><i class="fas fa-user"></i> Profile</a><a href="#" class="btn-logout" onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</a></div></nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h3 id="userName">Student</h3><p id="userRole">Student Panel</p></div>
+            <a href="dashboard.html" class="menu-item"><span class="icon"><i class="fas fa-chart-pie"></i></span> <span>Dashboard</span></a>
+            <a href="attendance.html" class="menu-item"><span class="icon"><i class="fas fa-clipboard-check"></i></span> <span>Attendance</span></a>
+            <a href="assignments.html" class="menu-item"><span class="icon"><i class="fas fa-file-pen"></i></span> <span>Assignments</span></a>
+            <a href="notes.html" class="menu-item"><span class="icon"><i class="fas fa-book"></i></span> <span>Notes</span></a>
+            <a href="results.html" class="menu-item active"><span class="icon"><i class="fas fa-chart-line"></i></span> <span>Results</span></a>
+            <a href="timetable.html" class="menu-item"><span class="icon"><i class="fas fa-calendar-days"></i></span> <span>Timetable</span></a>
+            <a href="profile.html" class="menu-item"><span class="icon"><i class="fas fa-user"></i></span> <span>Profile</span></a>
+        </aside>
+        <main class="main-content">
+            <div class="page-header"><h1><i class="fas fa-chart-line"></i> My Results</h1><p>View your marks and grades</p></div>
+            <div id="alertBox" class="alert"></div>
+            <div class="card"><div class="table-container"><table><thead><tr><th>Subject</th><th>Code</th><th>Marks</th><th>Grade</th><th>Exam Type</th></tr></thead><tbody id="resultsTable"><tr><td colspan="5"><div class="loading"><div class="spinner"></div><p>Loading...</p></div></td></tr></tbody></table></div></div>
+        </main>
+    </div>
+    <script src="../js/auth.js"></script><script src="../js/student.js"></script><script>checkAuth('student'); setUserInfo(); loadResults();</script>
+</body>
+</html>

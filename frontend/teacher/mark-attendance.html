@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mark Attendance - College ERP</title><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></head>
+<body>
+    <nav class="navbar"><div class="logo"><i class="fas fa-graduation-cap"></i> College <span>ERP</span></div><div class="nav-links"><a href="profile.html"><i class="fas fa-user"></i> Profile</a><a href="#" class="btn-logout" onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</a></div></nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h3 id="userName">Teacher</h3><p id="userRole">Teacher Panel</p></div>
+            <a href="dashboard.html" class="menu-item"><span class="icon"><i class="fas fa-chart-pie"></i></span> <span>Dashboard</span></a>
+            <a href="mark-attendance.html" class="menu-item active"><span class="icon"><i class="fas fa-clipboard-check"></i></span> <span>Mark Attendance</span></a>
+            <a href="upload-notes.html" class="menu-item"><span class="icon"><i class="fas fa-book"></i></span> <span>Upload Notes</span></a>
+            <a href="upload-assignment.html" class="menu-item"><span class="icon"><i class="fas fa-file-pen"></i></span> <span>Upload Assignment</span></a>
+            <a href="enter-marks.html" class="menu-item"><span class="icon"><i class="fas fa-chart-line"></i></span> <span>Enter Marks</span></a>
+            <a href="student-list.html" class="menu-item"><span class="icon"><i class="fas fa-users"></i></span> <span>Student List</span></a>
+            <a href="timetable.html" class="menu-item"><span class="icon"><i class="fas fa-calendar-days"></i></span> <span>Timetable</span></a>
+            <a href="profile.html" class="menu-item"><span class="icon"><i class="fas fa-user"></i></span> <span>Profile</span></a>
+        </aside>
+        <main class="main-content">
+            <div class="page-header"><h1><i class="fas fa-clipboard-check"></i> Mark Attendance</h1><p>Select subject, date and mark student attendance</p></div>
+            <div id="alertBox" class="alert"></div>
+            <div class="card">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                    <div class="form-group"><label><i class="fas fa-book-open"></i> Subject</label><select id="attendanceSubject" class="subject-dropdown"></select></div>
+                    <div class="form-group"><label><i class="fas fa-calendar-days"></i> Date</label><input type="date" id="attendanceDate" value=""></div>
+                </div>
+                <div class="card-header"><h2><i class="fas fa-users"></i> Students</h2><p style="font-size:12px; color:#64748b;"><i class="fas fa-check"></i> Checked = Present, <i class="fas fa-xmark"></i> Unchecked = Absent</p></div>
+                <ul class="checkbox-list" id="studentList"><li><div class="loading"><div class="spinner"></div><p>Loading students...</p></div></li></ul>
+                <div style="margin-top: 20px;"><button class="btn btn-primary btn-block" onclick="submitAttendance()"><i class="fas fa-check-circle"></i> Submit Attendance</button></div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/auth.js"></script><script src="../js/teacher.js"></script>
+    <script>checkAuth('teacher'); setUserInfo(); document.getElementById('attendanceDate').valueAsDate = new Date(); loadTeacherSubjects(); loadStudentsForAttendance();</script>
+</body>
+</html>

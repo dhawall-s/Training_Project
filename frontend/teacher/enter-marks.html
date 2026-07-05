@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Enter Marks - College ERP</title><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></head>
+<body>
+    <nav class="navbar"><div class="logo"><i class="fas fa-graduation-cap"></i> College <span>ERP</span></div><div class="nav-links"><a href="profile.html"><i class="fas fa-user"></i> Profile</a><a href="#" class="btn-logout" onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</a></div></nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h3 id="userName">Teacher</h3><p id="userRole">Teacher Panel</p></div>
+            <a href="dashboard.html" class="menu-item"><span class="icon"><i class="fas fa-chart-pie"></i></span> <span>Dashboard</span></a>
+            <a href="mark-attendance.html" class="menu-item"><span class="icon"><i class="fas fa-clipboard-check"></i></span> <span>Mark Attendance</span></a>
+            <a href="upload-notes.html" class="menu-item"><span class="icon"><i class="fas fa-book"></i></span> <span>Upload Notes</span></a>
+            <a href="upload-assignment.html" class="menu-item"><span class="icon"><i class="fas fa-file-pen"></i></span> <span>Upload Assignment</span></a>
+            <a href="enter-marks.html" class="menu-item active"><span class="icon"><i class="fas fa-chart-line"></i></span> <span>Enter Marks</span></a>
+            <a href="student-list.html" class="menu-item"><span class="icon"><i class="fas fa-users"></i></span> <span>Student List</span></a>
+            <a href="timetable.html" class="menu-item"><span class="icon"><i class="fas fa-calendar-days"></i></span> <span>Timetable</span></a>
+            <a href="profile.html" class="menu-item"><span class="icon"><i class="fas fa-user"></i></span> <span>Profile</span></a>
+        </aside>
+        <main class="main-content">
+            <div class="page-header"><h1><i class="fas fa-chart-line"></i> Enter Marks</h1><p>Enter student marks for a subject</p></div>
+            <div id="alertBox" class="alert"></div>
+            <div class="card">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                    <div class="form-group"><label><i class="fas fa-book-open"></i> Subject</label><select id="marksSubject" class="subject-dropdown" required></select></div>
+                    <div class="form-group"><label><i class="fas fa-calendar-days"></i> Semester</label>
+                        <select id="marksSemester"><option value="1">Sem 1</option><option value="2">Sem 2</option><option value="3">Sem 3</option><option value="4">Sem 4</option><option value="5">Sem 5</option><option value="6">Sem 6</option><option value="7">Sem 7</option><option value="8">Sem 8</option></select>
+                    </div>
+                    <div class="form-group"><label><i class="fas fa-file-pen"></i> Exam Type</label>
+                        <select id="marksExamType"><option value="internal">Internal</option><option value="external">External</option><option value="practical">Practical</option></select>
+                    </div>
+                </div>
+                <div class="card-header"><h2><i class="fas fa-users"></i> Students - Enter Marks (out of 100)</h2></div>
+                <div id="marksStudentList"><div class="loading"><div class="spinner"></div><p>Loading students...</p></div></div>
+                <div style="margin-top: 20px;"><button class="btn btn-primary btn-block" onclick="submitMarks()"><i class="fas fa-save"></i> Save Marks</button></div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/auth.js"></script><script src="../js/teacher.js"></script><script>checkAuth('teacher'); setUserInfo(); loadTeacherSubjects(); loadStudentsForMarks();</script>
+</body>
+</html>

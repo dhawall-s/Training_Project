@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Subjects - College ERP</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><i class="fas fa-graduation-cap"></i> College <span>ERP</span></div>
+        <div class="nav-links">
+            <a href="#" class="btn-logout" onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</a>
+        </div>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h3 id="userName">Admin</h3><p id="userRole">Admin Panel</p></div>
+            <a href="dashboard.html" class="menu-item"><span class="icon"><i class="fas fa-chart-pie"></i></span> <span>Dashboard</span></a>
+            <a href="manage-students.html" class="menu-item"><span class="icon"><i class="fas fa-users"></i></span> <span>Manage Students</span></a>
+            <a href="manage-teachers.html" class="menu-item"><span class="icon"><i class="fas fa-chalkboard-user"></i></span> <span>Manage Teachers</span></a>
+            <a href="manage-subjects.html" class="menu-item active"><span class="icon"><i class="fas fa-book"></i></span> <span>Manage Subjects</span></a>
+            <a href="manage-departments.html" class="menu-item"><span class="icon"><i class="fas fa-building"></i></span> <span>Departments</span></a>
+            <a href="create-timetable.html" class="menu-item"><span class="icon"><i class="fas fa-calendar-days"></i></span> <span>Timetable</span></a>
+            <a href="notifications.html" class="menu-item"><span class="icon"><i class="fas fa-bell"></i></span> <span>Notifications</span></a>
+            <a href="analytics.html" class="menu-item"><span class="icon"><i class="fas fa-chart-simple"></i></span> <span>Analytics</span></a>
+        </aside>
+        <main class="main-content">
+            <div class="page-header">
+                <h1><i class="fas fa-book"></i> Manage Subjects</h1>
+                <p>Add and manage college subjects</p>
+            </div>
+            <div id="alertBox" class="alert"></div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>All Subjects</h2>
+                    <button class="btn btn-primary" onclick="openModal('addSubjectModal')"><i class="fas fa-plus"></i> Add Subject</button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Code</th>
+                                <th>Department</th>
+                                <th>Semester</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subjectsTable">
+                            <tr>
+                                <td colspan="5">
+                                    <div class="loading"><div class="spinner"></div><p>Loading...</p></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ADD SUBJECT MODAL -->
+    <div class="modal-overlay" id="addSubjectModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus"></i> Add Subject</h2>
+                <button class="modal-close" onclick="closeModal('addSubjectModal')">&times;</button>
+            </div>
+            <div class="form-group"><label>Subject Name</label><input type="text" id="subjectName" placeholder="e.g., Data Structures" required></div>
+            <div class="form-group"><label>Subject Code</label><input type="text" id="subjectCode" placeholder="e.g., CS301" required></div>
+            <div class="form-group"><label>Department</label><input type="text" id="subjectDept" placeholder="e.g., Computer Science" required></div>
+            <div class="form-group"><label>Semester</label><input type="number" id="subjectSemester" min="1" max="8" value="1"></div>
+            <button class="btn btn-primary btn-block" onclick="addSubject()"><i class="fas fa-floppy-disk"></i> Save Subject</button>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>checkAuth('admin'); setUserInfo(); loadAllSubjects();</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - College ERP</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><i class="fas fa-graduation-cap"></i> College <span>ERP</span></div>
+        <div class="nav-links">
+            <a href="#" class="btn-logout" onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</a>
+        </div>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h3 id="userName">Admin</h3><p id="userRole">Admin Panel</p></div>
+            <a href="dashboard.html" class="menu-item"><span class="icon"><i class="fas fa-chart-pie"></i></span> <span>Dashboard</span></a>
+            <a href="manage-students.html" class="menu-item"><span class="icon"><i class="fas fa-users"></i></span> <span>Manage Students</span></a>
+            <a href="manage-teachers.html" class="menu-item"><span class="icon"><i class="fas fa-chalkboard-user"></i></span> <span>Manage Teachers</span></a>
+            <a href="manage-subjects.html" class="menu-item"><span class="icon"><i class="fas fa-book"></i></span> <span>Manage Subjects</span></a>
+            <a href="manage-departments.html" class="menu-item"><span class="icon"><i class="fas fa-building"></i></span> <span>Departments</span></a>
+            <a href="create-timetable.html" class="menu-item"><span class="icon"><i class="fas fa-calendar-days"></i></span> <span>Timetable</span></a>
+            <a href="notifications.html" class="menu-item active"><span class="icon"><i class="fas fa-bell"></i></span> <span>Notifications</span></a>
+            <a href="analytics.html" class="menu-item"><span class="icon"><i class="fas fa-chart-simple"></i></span> <span>Analytics</span></a>
+        </aside>
+        <main class="main-content">
+            <div class="page-header">
+                <h1><i class="fas fa-bell"></i> Notifications</h1>
+                <p>Send announcements to students and teachers</p>
+            </div>
+            <div id="alertBox" class="alert"></div>
+
+            <!-- Send Notification Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-paper-plane"></i> Send New Notification</h2>
+                </div>
+                <form id="notifForm" onsubmit="event.preventDefault(); sendNotification();">
+                    <div class="form-group"><label>Title</label><input type="text" id="notifTitle" placeholder="e.g., Exam Schedule Update" required></div>
+                    <div class="form-group"><label>Message</label><textarea id="notifMessage" placeholder="Type your notification message here..." required></textarea></div>
+                    <div class="form-group">
+                        <label>Send To</label>
+                        <select id="notifTarget">
+                            <option value="all">All (Students + Teachers)</option>
+                            <option value="student">Students Only</option>
+                            <option value="teacher">Teachers Only</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Notification</button>
+                </form>
+            </div>
+
+            <!-- Sent Notifications -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-list-ul"></i> Sent Notifications</h2>
+                </div>
+                <div id="notificationsContainer">
+                    <div class="loading"><div class="spinner"></div><p>Loading...</p></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>checkAuth('admin'); setUserInfo(); loadNotifications();</script>
+</body>
+</html>
