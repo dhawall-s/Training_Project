@@ -29,9 +29,12 @@ const connectDB = async () => {
         await createDefaultAdmin();
 
     } catch (error) {
-        // If connection fails, show error and stop the server
+        // If connection fails, show error
         console.error(`❌ MongoDB Connection Error: ${error.message}`);
-        process.exit(1); // Stop the server (1 = error exit)
+        // Do not crash the serverless function process on Vercel
+        if (process.env.NODE_ENV !== 'production') {
+            process.exit(1); // Stop the server (1 = error exit)
+        }
     }
 };
 
