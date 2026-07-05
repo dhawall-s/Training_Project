@@ -13,10 +13,10 @@ const bcrypt = require('bcryptjs');
 const connectDB = async () => {
     try {
         // mongoose.connect() - connects to MongoDB
-        // 'mongodb://localhost:27017/college_erp' - this is the connection URL
-        // localhost:27017 = MongoDB runs on your computer on port 27017
-        // college_erp = name of our database (MongoDB will create it automatically)
-        const conn = await mongoose.connect('mongodb://localhost:27017/college_erp');
+        // process.env.MONGODB_URI - this is the cloud database URL (for production/Vercel)
+        // Defaulting to localhost for local development
+        const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/college_erp';
+        const conn = await mongoose.connect(mongoURI);
 
         console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
 

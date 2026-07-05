@@ -5,6 +5,7 @@
 // to create APIs (backend endpoints) that frontend can call
 // Think of it as a "traffic controller" for our backend
 
+require('dotenv').config();            // WHY: Loads environment variables from .env file
 const express = require('express');   // Web framework for creating APIs
 const cors = require('cors');         // WHY: Allows frontend to talk to backend (different ports)
 const path = require('path');         // WHY: Helps handle file paths correctly on any OS
@@ -62,9 +63,14 @@ app.get('/', (req, res) => {
 // ============================================
 // START SERVER
 // ============================================
-const PORT = 5000; // Our backend will run on port 5000
+const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`🚀 Server is running on http://localhost:${PORT}`);
-    console.log(`📁 Upload folder: ${path.join(__dirname, 'uploads')}`);
-});
+// Listen only when not deployed on Vercel (production serverless environment)
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`🚀 Server is running on http://localhost:${PORT}`);
+        console.log(`📁 Upload folder: ${path.join(__dirname, 'uploads')}`);
+    });
+}
+
+module.exports = app;

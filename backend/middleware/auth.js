@@ -16,7 +16,7 @@ const jwt = require('jsonwebtoken');
 
 // Secret key for JWT - used to sign and verify tokens
 // WHY secret key: Only our server knows this key, so no one can fake a token
-const JWT_SECRET = 'college_erp_secret_key_2024';
+const JWT_SECRET = process.env.JWT_SECRET || 'college_erp_secret_key_2024';
 
 // ---- Main Auth Middleware ----
 // WHY: Protects routes - only logged in users can access

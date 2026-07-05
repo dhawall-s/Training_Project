@@ -8,9 +8,14 @@
 // - getToken: Gets JWT token from localStorage
 // - apiCall: Makes authenticated API calls
 
-// ---- Backend URL ----
-// WHY: We define it once here so we don't have to type it everywhere
-const API_URL = 'http://localhost:5000/api';
+// ---- Backend Base URL and API URL ----
+// WHY: We dynamically resolve the URL so that it works automatically on localhost
+// and when deployed on Vercel on the same domain without any modification.
+const BASE_URL = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
+    ? 'http://localhost:5000'
+    : window.location.origin;
+
+const API_URL = BASE_URL + '/api';
 
 // ============================================
 // SHOW ALERT - Display success/error message

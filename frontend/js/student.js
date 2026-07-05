@@ -101,7 +101,7 @@ async function loadAssignments() {
                 <td>${formatDate(a.dueDate)}</td>
                 <td>
                     ${a.fileUrl
-                        ? `<a href="http://localhost:5000${a.fileUrl}" target="_blank" class="btn btn-sm btn-primary"><i class="fas fa-download"></i> Download</a>`
+                        ? `<a href="${BASE_URL}${a.fileUrl}" target="_blank" class="btn btn-sm btn-primary"><i class="fas fa-download"></i> Download</a>`
                         : 'No file'}
                 </td>
             </tr>
@@ -130,7 +130,7 @@ async function loadNotes() {
                 <td>${n.subjectId ? n.subjectId.name : 'N/A'}</td>
                 <td>${formatDate(n.createdAt)}</td>
                 <td>
-                    <a href="http://localhost:5000${n.fileUrl}" target="_blank" class="btn btn-sm btn-success"><i class="fas fa-download"></i> Download PDF</a>
+                    <a href="${BASE_URL}${n.fileUrl}" target="_blank" class="btn btn-sm btn-success"><i class="fas fa-download"></i> Download PDF</a>
                 </td>
             </tr>
         `).join('');
