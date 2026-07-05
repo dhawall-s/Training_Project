@@ -1,13 +1,8 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "functions": {
-    "backend/server.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/backend/server.js" },
+    { "source": "/api/(.*)", "destination": "/api/server" },
     { "source": "/uploads/(.*)", "destination": "/backend/uploads/$1" },
     { "source": "/(.*)", "destination": "/frontend/$1" }
   ]
