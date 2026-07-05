@@ -42,15 +42,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Database connection check middleware
-// WHY: In serverless (Vercel), if database connection is not established,
-// mongoose buffers queries indefinitely, causing Vercel functions to timeout.
-// This middleware returns a clean 503 error immediately instead of hanging.
+// WHY: If the local database connection is not active, this middleware
+// returns a clean JSON error response immediately instead of letting the request hang.
 const mongoose = require('mongoose');
 app.use((req, res, next) => {
     // Only apply check to API routes, skip static assets if any
     if (req.path.startsWith('/api') && mongoose.connection.readyState !== 1) {
         return res.status(503).json({
-            message: '❌ Database connection is not established. Please configure your MONGODB_URI environment variable correctly in the Vercel Dashboard.'
+            message: '❌ Database connection is not established. Please ensure MongoDB is running on your machine.'
         });
     }
     next();

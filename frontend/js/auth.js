@@ -9,12 +9,8 @@
 // - apiCall: Makes authenticated API calls
 
 // ---- Backend Base URL and API URL ----
-// WHY: We dynamically resolve the URL so that it works automatically on localhost
-// and when deployed on Vercel on the same domain without any modification.
-const BASE_URL = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
-    ? 'http://localhost:5000'
-    : window.location.origin;
-
+// WHY: We use a static base URL pointing to our local Express server (running on port 5000)
+const BASE_URL = 'http://localhost:5000';
 const API_URL = BASE_URL + '/api';
 
 // ============================================

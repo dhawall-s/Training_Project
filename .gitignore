@@ -13,3 +13,5 @@ backend/uploads/*
 *.log
 .gemini/
 bun.lock
+
+.vercel

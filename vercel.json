@@ -1,9 +1,0 @@
-{
-  "version": 2,
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/server" },
-    { "source": "/uploads/(.*)", "destination": "/backend/uploads/$1" },
-    { "source": "/(.*)", "destination": "/frontend/$1" }
-  ]
-}
