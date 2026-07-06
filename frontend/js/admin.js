@@ -1,10 +1,3 @@
-// ============================================
-// admin.js - Admin Panel JavaScript
-// ============================================
-
-// ============================================
-// LOAD ADMIN DASHBOARD
-// ============================================
 async function loadAdminDashboard() {
     const result = await apiCall('/admin/dashboard');
 
@@ -33,9 +26,6 @@ async function loadAdminDashboard() {
     }
 }
 
-// ============================================
-// MANAGE STUDENTS
-// ============================================
 async function loadAllStudents() {
     const result = await apiCall('/admin/students');
 
@@ -132,9 +122,6 @@ async function deleteStudent(id) {
     }
 }
 
-// ============================================
-// MANAGE TEACHERS
-// ============================================
 async function loadAllTeachers() {
     const result = await apiCall('/admin/teachers');
 
@@ -228,9 +215,6 @@ async function deleteTeacher(id) {
     }
 }
 
-// ============================================
-// MANAGE SUBJECTS
-// ============================================
 async function loadAllSubjects() {
     const result = await apiCall('/admin/subjects');
 
@@ -287,9 +271,6 @@ async function deleteSubject(id) {
     }
 }
 
-// ============================================
-// MANAGE DEPARTMENTS
-// ============================================
 async function loadAllDepartments() {
     const result = await apiCall('/admin/departments');
 
@@ -342,9 +323,6 @@ async function deleteDepartment(id) {
     }
 }
 
-// ============================================
-// TIMETABLE
-// ============================================
 async function loadTimetable() {
     const dept = document.getElementById('ttDepartment') ? document.getElementById('ttDepartment').value : '';
     const sem = document.getElementById('ttSemester') ? document.getElementById('ttSemester').value : '';
@@ -438,9 +416,6 @@ function addPeriodRow() {
     container.appendChild(row);
 }
 
-// ============================================
-// NOTIFICATIONS
-// ============================================
 async function loadNotifications() {
     const result = await apiCall('/admin/notifications');
 
@@ -496,9 +471,6 @@ async function deleteNotification(id) {
     }
 }
 
-// ============================================
-// ANALYTICS
-// ============================================
 async function loadAnalytics() {
     const result = await apiCall('/admin/analytics');
 
@@ -546,9 +518,6 @@ async function loadAnalytics() {
     }
 }
 
-// ============================================
-// MODAL HELPERS
-// ============================================
 function openModal(id) {
     document.getElementById(id).classList.add('active');
     if (id === 'addTimetableModal') {
@@ -564,7 +533,6 @@ function initializeDefaultPeriods() {
     const container = document.getElementById('periodsContainer');
     if (!container) return;
 
-    // Default times with 1-hour gaps
     const defaultTimes = [
         "09:00 - 10:00",
         "10:00 - 11:00",

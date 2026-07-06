@@ -111,7 +111,7 @@ cd Training_Project
 The backend will run on `http://localhost:5000`.
 
 ### Step 3: Open the Frontend
-Simply open `frontend/index.html` in any web browser. 
+Simply open `frontend/index.html` in any web browser.
 *(Alternatively, right-click `index.html` in VS Code and select "Open with Live Server".)*
 
 ---

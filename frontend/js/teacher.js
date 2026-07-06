@@ -1,10 +1,3 @@
-// ============================================
-// teacher.js - Teacher Panel JavaScript
-// ============================================
-
-// ============================================
-// LOAD TEACHER DASHBOARD
-// ============================================
 async function loadTeacherDashboard() {
     const result = await apiCall('/teacher/dashboard');
 
@@ -33,9 +26,6 @@ async function loadTeacherDashboard() {
     }
 }
 
-// ============================================
-// LOAD STUDENTS FOR ATTENDANCE
-// ============================================
 async function loadStudentsForAttendance() {
     const result = await apiCall('/teacher/students');
 
@@ -52,7 +42,7 @@ async function loadStudentsForAttendance() {
             <li>
                 <input type="checkbox" id="student_${s._id}" value="${s._id}" checked>
                 <label for="student_${s._id}">
-                    <strong>${s.userId ? s.userId.name : 'N/A'}</strong> 
+                    <strong>${s.userId ? s.userId.name : 'N/A'}</strong>
                     (Roll: ${s.rollNo}) - Sem ${s.semester}
                 </label>
             </li>
@@ -60,9 +50,6 @@ async function loadStudentsForAttendance() {
     }
 }
 
-// ============================================
-// SUBMIT ATTENDANCE
-// ============================================
 async function submitAttendance() {
     const subjectId = document.getElementById('attendanceSubject').value;
     const date = document.getElementById('attendanceDate').value;
@@ -98,9 +85,6 @@ async function submitAttendance() {
     }
 }
 
-// ============================================
-// LOAD SUBJECTS (for dropdowns)
-// ============================================
 async function loadTeacherSubjects() {
     const result = await apiCall('/teacher/subjects');
 
@@ -129,9 +113,6 @@ async function loadTeacherSubjects() {
     }
 }
 
-// ============================================
-// UPLOAD NOTE
-// ============================================
 async function uploadNote() {
     const title = document.getElementById('noteTitle').value;
     const subjectId = document.getElementById('noteSubject').value;
@@ -157,9 +138,6 @@ async function uploadNote() {
     }
 }
 
-// ============================================
-// UPLOAD ASSIGNMENT
-// ============================================
 async function uploadAssignment() {
     const title = document.getElementById('assignTitle').value;
     const description = document.getElementById('assignDesc').value;
@@ -189,9 +167,6 @@ async function uploadAssignment() {
     }
 }
 
-// ============================================
-// LOAD STUDENTS FOR MARKS ENTRY
-// ============================================
 async function loadStudentsForMarks() {
     const result = await apiCall('/teacher/students');
 
@@ -207,17 +182,14 @@ async function loadStudentsForMarks() {
         container.innerHTML = result.data.students.map(s => `
             <div style="display:flex; align-items:center; gap:12px; padding:10px; border-bottom:1px solid #f1f5f9;">
                 <span style="flex:1;"><strong>${s.userId ? s.userId.name : 'N/A'}</strong> (${s.rollNo})</span>
-                <input type="number" class="marks-input" data-student="${s._id}" 
-                    placeholder="Marks" min="0" max="100" 
+                <input type="number" class="marks-input" data-student="${s._id}"
+                    placeholder="Marks" min="0" max="100"
                     style="width:80px; padding:6px; border:1px solid #d1d5db; border-radius:6px;">
             </div>
         `).join('');
     }
 }
 
-// ============================================
-// SUBMIT MARKS
-// ============================================
 async function submitMarks() {
     const subjectId = document.getElementById('marksSubject').value;
     const semester = document.getElementById('marksSemester').value;
@@ -256,9 +228,6 @@ async function submitMarks() {
     }
 }
 
-// ============================================
-// LOAD STUDENT LIST (View only)
-// ============================================
 async function loadStudentList() {
     const result = await apiCall('/teacher/students');
 
@@ -283,9 +252,6 @@ async function loadStudentList() {
     }
 }
 
-// ============================================
-// LOAD TEACHER PROFILE
-// ============================================
 async function loadTeacherProfile() {
     const result = await apiCall('/auth/profile');
 
@@ -308,9 +274,6 @@ async function loadTeacherProfile() {
     }
 }
 
-// ============================================
-// LOAD TIMETABLE (Teacher View)
-// ============================================
 async function loadTimetable() {
     const result = await apiCall('/teacher/timetable');
 

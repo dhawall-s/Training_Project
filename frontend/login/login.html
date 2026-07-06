@@ -39,11 +39,7 @@
 
     <script src="../js/auth.js"></script>
     <script>
-        // ============================================
-        // LOGIN FORM HANDLER
-        // ============================================
-        // WHY: No role selection needed - system auto-detects role from database
-        // User just enters email and password
+
         document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
@@ -51,7 +47,7 @@
             const password = document.getElementById('password').value;
 
             try {
-                // Send login request - no role needed
+
                 const response = await fetch(`${API_URL}/auth/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -61,15 +57,12 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    // Save token and user data
+
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
 
                     showAlert('Login successful! Redirecting...', 'success');
 
-                    // Auto-redirect based on role from database
-                    // WHY: The backend returns the user's role automatically
-                    // No need for user to select their role
                     setTimeout(() => {
                         if (data.user.role === 'student') {
                             window.location.href = '../student/dashboard.html';

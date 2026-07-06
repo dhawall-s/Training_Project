@@ -1,9 +1,3 @@
-// ============================================
-// teacherController.js - Teacher Panel Controller
-// ============================================
-// WHY: Contains all logic for teacher panel APIs
-// Teachers can: mark attendance, upload notes/assignments, enter marks, view students, view timetable
-
 const Teacher = require('../models/Teacher');
 const Student = require('../models/Student');
 const Attendance = require('../models/Attendance');
@@ -15,14 +9,10 @@ const Timetable = require('../models/Timetable');
 const Notification = require('../models/Notification');
 const User = require('../models/User');
 
-// Helper to escape regex special characters
 const escapeRegex = (text) => {
     return text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
 
-// ============================================
-// 1. DASHBOARD - Teacher Dashboard Data
-// ============================================
 const getDashboard = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ userId: req.user.id }).populate('subjects');
@@ -30,19 +20,13 @@ const getDashboard = async (req, res) => {
         if (!teacher) {
             return res.status(404).json({ message: ' Teacher record not found' });
         }
-
-        // Count students in teacher's department (case-insensitive & trimmed space)
         const studentCount = await Student.countDocuments({
             department: { $regex: new RegExp('^\\s*' + escapeRegex(teacher.department.trim()) + '\\s*$', 'i') }
         });
 
-        // Count assignments uploaded by this teacher
         const assignmentCount = await Assignment.countDocuments({ teacherId: teacher._id });
 
-        // Count notes uploaded by this teacher
         const notesCount = await Note.countDocuments({ teacherId: teacher._id });
-
-        // Recent notifications
         const notifications = await Notification.find({
             targetRole: { $in: ['all', 'teacher'] }
         }).sort({ createdAt: -1 }).limit(5);
@@ -64,9 +48,6 @@ const getDashboard = async (req, res) => {
     }
 };
 
-// ============================================
-// 2. MARK ATTENDANCE - Mark Student Attendance
-// ============================================
 const markAttendance = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ userId: req.user.id });
@@ -108,9 +89,6 @@ const markAttendance = async (req, res) => {
     }
 };
 
-// ============================================
-// 3. UPLOAD NOTES - Upload PDF Notes
-// ============================================
 const uploadNote = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ userId: req.user.id });
@@ -136,9 +114,6 @@ const uploadNote = async (req, res) => {
     }
 };
 
-// ============================================
-// 4. UPLOAD ASSIGNMENT
-// ============================================
 const uploadAssignment = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ userId: req.user.id });
@@ -166,9 +141,6 @@ const uploadAssignment = async (req, res) => {
     }
 };
 
-// ============================================
-// 5. ENTER MARKS - Enter Student Marks/Results
-// ============================================
 const enterMarks = async (req, res) => {
     try {
         const { subjectId, semester, examType, marks } = req.body;
@@ -209,9 +181,6 @@ const enterMarks = async (req, res) => {
     }
 };
 
-// ============================================
-// 6. GET STUDENTS - View Student List
-// ============================================
 const getStudents = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ userId: req.user.id });
@@ -228,9 +197,6 @@ const getStudents = async (req, res) => {
     }
 };
 
-// ============================================
-// 7. GET SUBJECTS - View Teacher's Subjects
-// ============================================
 const getSubjects = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ userId: req.user.id }).populate('subjects');
@@ -250,9 +216,6 @@ const getSubjects = async (req, res) => {
     }
 };
 
-// ============================================
-// 8. GET TIMETABLE - Teacher Timetable View
-// ============================================
 const getTimetable = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({ userId: req.user.id });

@@ -1,9 +1,3 @@
-// ============================================
-// adminController.js - Admin Panel Controller
-// ============================================
-// WHY: Contains clean, simplified database CRUD logic for admin operations.
-// Shorter code makes it easy to explain in project presentations.
-
 const User = require('../models/User');
 const Student = require('../models/Student');
 const Teacher = require('../models/Teacher');
@@ -13,12 +7,8 @@ const Timetable = require('../models/Timetable');
 const Notification = require('../models/Notification');
 const bcrypt = require('bcryptjs');
 
-// Helper to escape regex special characters
 const escapeRegex = (text) => text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
-// ============================================
-// 1. DASHBOARD OVERVIEW
-// ============================================
 const getDashboard = async (req, res) => {
     try {
         res.json({
@@ -35,9 +25,6 @@ const getDashboard = async (req, res) => {
     }
 };
 
-// ============================================
-// 2. MANAGE STUDENTS (CRUD)
-// ============================================
 const getAllStudents = async (req, res) => {
     try {
         const students = await Student.find().populate('userId', 'name email role');
@@ -51,7 +38,7 @@ const addStudent = async (req, res) => {
     try {
         const { name, email, password, rollNo, department, semester, phone } = req.body;
         const hashedPassword = await bcrypt.hash(password || '123456', 10);
-        
+
         const user = await User.create({ name, email, password: hashedPassword, role: 'student' });
         const student = await Student.create({
             userId: user._id,
@@ -74,7 +61,7 @@ const updateStudent = async (req, res) => {
         if (!student) return res.status(404).json({ message: 'Student not found' });
 
         await User.findByIdAndUpdate(student.userId, { name, email });
-        
+
         student.rollNo = rollNo ? rollNo.trim() : student.rollNo;
         student.department = department ? department.trim() : student.department;
         student.semester = semester || student.semester;
@@ -100,9 +87,6 @@ const deleteStudent = async (req, res) => {
     }
 };
 
-// ============================================
-// 3. MANAGE TEACHERS (CRUD)
-// ============================================
 const getAllTeachers = async (req, res) => {
     try {
         const teachers = await Teacher.find().populate('userId', 'name email').populate('subjects', 'name code');
@@ -116,7 +100,7 @@ const addTeacher = async (req, res) => {
     try {
         const { name, email, password, employeeId, department, phone, qualification } = req.body;
         const hashedPassword = await bcrypt.hash(password || '123456', 10);
-        
+
         const user = await User.create({ name, email, password: hashedPassword, role: 'teacher' });
         const teacher = await Teacher.create({
             userId: user._id,
@@ -166,9 +150,6 @@ const deleteTeacher = async (req, res) => {
     }
 };
 
-// ============================================
-// 4. MANAGE SUBJECTS (CRUD)
-// ============================================
 const getAllSubjects = async (req, res) => {
     try {
         const subjects = await Subject.find().sort({ department: 1, semester: 1 });
@@ -220,9 +201,6 @@ const deleteSubject = async (req, res) => {
     }
 };
 
-// ============================================
-// 5. MANAGE DEPARTMENTS (CRUD)
-// ============================================
 const getAllDepartments = async (req, res) => {
     try {
         const departments = await Department.find().sort({ name: 1 });
@@ -272,9 +250,6 @@ const deleteDepartment = async (req, res) => {
     }
 };
 
-// ============================================
-// 6. MANAGE TIMETABLE (CRUD)
-// ============================================
 const getTimetable = async (req, res) => {
     try {
         const { department, semester } = req.query;
@@ -318,9 +293,6 @@ const deleteTimetable = async (req, res) => {
     }
 };
 
-// ============================================
-// 7. NOTIFICATIONS (CRUD)
-// ============================================
 const getNotifications = async (req, res) => {
     try {
         const notifications = await Notification.find().populate('createdBy', 'name').sort({ createdAt: -1 });
@@ -351,14 +323,11 @@ const deleteNotification = async (req, res) => {
     }
 };
 
-// ============================================
-// 8. ANALYTICS
-// ============================================
 const getAnalytics = async (req, res) => {
     try {
         const studentsByDept = await Student.aggregate([{ $group: { _id: '$department', count: { $sum: 1 } } }]);
         const teachersByDept = await Teacher.aggregate([{ $group: { _id: '$department', count: { $sum: 1 } } }]);
-        
+
         res.json({
             studentsByDept,
             teachersByDept,

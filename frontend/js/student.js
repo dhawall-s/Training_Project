@@ -1,12 +1,3 @@
-// ============================================
-// student.js - Student Panel JavaScript
-// ============================================
-// WHY: Contains all frontend logic for student pages
-// Loads data from backend APIs and displays it on the page
-
-// ============================================
-// LOAD STUDENT DASHBOARD
-// ============================================
 async function loadStudentDashboard() {
     const result = await apiCall('/student/dashboard');
 
@@ -18,7 +9,6 @@ async function loadStudentDashboard() {
         document.getElementById('upcomingAssignments').textContent = stats.upcomingAssignments;
         document.getElementById('totalSubjects').textContent = stats.totalSubjects;
 
-        // Display upcoming assignments
         const assignmentsList = document.getElementById('assignmentsList');
         if (assignmentsList) {
             if (upcomingAssignments.length === 0) {
@@ -34,7 +24,6 @@ async function loadStudentDashboard() {
             }
         }
 
-        // Display notifications
         const notifList = document.getElementById('notificationsList');
         if (notifList) {
             if (notifications.length === 0) {
@@ -52,9 +41,6 @@ async function loadStudentDashboard() {
     }
 }
 
-// ============================================
-// LOAD ATTENDANCE
-// ============================================
 async function loadAttendance() {
     const result = await apiCall('/student/attendance');
 
@@ -78,9 +64,6 @@ async function loadAttendance() {
     }
 }
 
-// ============================================
-// LOAD ASSIGNMENTS
-// ============================================
 async function loadAssignments() {
     const result = await apiCall('/student/assignments');
 
@@ -109,9 +92,6 @@ async function loadAssignments() {
     }
 }
 
-// ============================================
-// LOAD NOTES
-// ============================================
 async function loadNotes() {
     const result = await apiCall('/student/notes');
 
@@ -137,9 +117,6 @@ async function loadNotes() {
     }
 }
 
-// ============================================
-// LOAD RESULTS
-// ============================================
 async function loadResults() {
     const result = await apiCall('/student/results');
 
@@ -174,9 +151,6 @@ async function loadResults() {
     }
 }
 
-// ============================================
-// LOAD TIMETABLE
-// ============================================
 async function loadTimetable() {
     const result = await apiCall('/student/timetable');
 
@@ -211,9 +185,6 @@ async function loadTimetable() {
     }
 }
 
-// ============================================
-// LOAD SUBJECTS
-// ============================================
 async function loadSubjects() {
     const result = await apiCall('/student/subjects');
 
@@ -237,9 +208,6 @@ async function loadSubjects() {
     }
 }
 
-// ============================================
-// LOAD STUDENT PROFILE
-// ============================================
 async function loadProfile() {
     const result = await apiCall('/auth/profile');
 
